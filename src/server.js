@@ -25,14 +25,10 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-//
-app.get("/", (req, res) => {
-  res.send("Zync Chat Backend is running 🚀");
-});
 
-// app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
-// app.use("/api/chat", chatRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
