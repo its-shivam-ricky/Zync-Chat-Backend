@@ -17,7 +17,7 @@ const __dirname = path.resolve();
 
 app.use(
   cors({
-    origin: "https://zyncchat.netlify.app/",
+    origin: ["http://localhost:5173", "https://zyncchat.netlify.app"],
     credentials: true, // allow frontend to send cookies
   })
 );
@@ -25,9 +25,14 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/chat", chatRoutes);
+//
+app.get("/", (req, res) => {
+  res.send("Zync Chat Backend is running 🚀");
+});
+
+// app.use("/api/auth", authRoutes);
+// app.use("/api/users", userRoutes);
+// app.use("/api/chat", chatRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
